@@ -1,0 +1,56 @@
+{
+  "name": "shine-component",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host=0.0.0.0 --port=9566",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
+    "storybook": "start-storybook -p 9577",
+    "storybook-2": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 9577",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.7",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-interactions": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/builder-vite": "^0.2.6",
+    "@storybook/react": "^6.5.15",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-react": "^3.0.0",
+    "babel-loader": "^8.3.0",
+    "styled-components": "^5.3.6",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0",
+    "vite-plugin-dts": "^1.7.1"
+  },
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "react": "^16.8.0 || 17.x",
+    "react-dom": "^16.8.0 || 17.x",
+    "styled-components": "^5.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/shine-component.umd.js",
+  "module": "./dist/shine-component.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/shine-component.es.js",
+      "require": "./dist/shine-component.umd.js"
+    }
+  }
+}
