@@ -1,7 +1,7 @@
 {
-  "name": "shine-component",
+  "name": "@printnow/shine-component",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite --host=0.0.0.0 --port=9566",
@@ -22,6 +22,7 @@
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",
     "@storybook/addon-links": "^6.5.15",
+    "@storybook/addon-viewport": "^6.5.15",
     "@storybook/builder-vite": "^0.2.6",
     "@storybook/react": "^6.5.15",
     "@storybook/testing-library": "^0.0.13",
