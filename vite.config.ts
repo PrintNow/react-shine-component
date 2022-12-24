@@ -11,7 +11,16 @@ export default defineConfig({
       insertTypesEntry: true,
     }),
   ],
-
+  resolve: {
+    alias: { // 文件目录缩写配置
+      '@': path.resolve('src'),
+      '@assets': path.resolve('src/assets'),
+      '@components': path.resolve('src/components'),
+    },
+  },
+  esbuild: { // 使用到了react17
+    jsxInject: `import React from 'react'`,
+  },
   build: {
     emptyOutDir: true,
     lib: {
