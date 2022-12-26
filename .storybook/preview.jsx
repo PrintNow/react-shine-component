@@ -93,7 +93,7 @@ export const parameters = {viewport: {viewports: {...viewPorts}}};
 
 export const decorators = [
   GridOverlayDecorator,
-  // StrictModeDecorator,
+  StrictModeDecorator,
   AppProviderDecorator,
   ReactRenderProfiler,
 ];
