@@ -30,12 +30,13 @@ export default defineConfig({
       fileName: (format) => `shine-component.${ format }.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'styled-components'],
+      external: ['react', 'react-dom', 'styled-components', '@shopify/polaris'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
           'styled-components': 'styled',
+          '@shopify/polaris': '@shopify/polaris'
         },
       },
     },
