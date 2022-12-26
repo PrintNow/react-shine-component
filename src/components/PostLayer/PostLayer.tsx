@@ -1,10 +1,14 @@
-import { Avatar } from "@shopify/polaris"
+import { Avatar, Icon } from "@shopify/polaris"
+import { CancelMajor } from '@shopify/polaris-icons';
 import React from "react"
+import { classNames } from "../../../.storybook/GridOverlay"
 import { Badge } from "../Badge"
 import style from "./PostLayer.module.scss"
 
 export interface PostLayerProps {
   title: string | React.ReactNode;
+
+  show: boolean;
 
   /* 状态 */
   statusBadge: "online" | "offline"
@@ -22,7 +26,7 @@ export interface PostLayerProps {
   onClick(): void;
 }
 
-export function PostLayer({ title, avatar, avatarAlt, statusBadge, inputPlaceholder, onClick, children, onClose }: PostLayerProps) {
+export function PostLayer({ title, show, avatar, avatarAlt, statusBadge, inputPlaceholder, onClick, children, onClose }: PostLayerProps) {
   const statusColorMap = {
     online: {
       color: `#289F4D`,
@@ -34,7 +38,7 @@ export function PostLayer({ title, avatar, avatarAlt, statusBadge, inputPlacehol
     }
   }[statusBadge.toLowerCase()]
 
-  return <div className={ style.PostLayer } onClick={onClick}>
+  return <div className={ classNames(style.PostLayer, show ? style.PostLayer__Enter : style.PostLayer__Leave) } onClick={ onClick }>
     <header>
       <div className={ style.Avatar }>
         { !avatar ? <Avatar size={ "small" } customer name="Farrah" /> : <img src={ avatar } alt={ avatarAlt } /> }
@@ -42,11 +46,16 @@ export function PostLayer({ title, avatar, avatarAlt, statusBadge, inputPlacehol
       <div className={ style.Information }>
         <div className={ style.Title }>{ title }</div>
         <div className={ style.StatusBadge }>
-          <Badge color={statusColorMap?.color ?? 'red'}>{statusColorMap?.text ?? "Undefined"}</Badge>
+          <Badge color={ statusColorMap?.color ?? 'red' }>{ statusColorMap?.text ?? "Undefined" }</Badge>
         </div>
       </div>
 
-      <div className={ style.CloseBtn } onClick={ onClose }></div>
+      <div className={ style.CloseBtn }>
+        <span onClick={ onClose }>
+          {/* @ts-ignore */ }
+          <Icon source={ CancelMajor } color="base" />
+        </span>
+      </div>
     </header>
     <main>
       { children }

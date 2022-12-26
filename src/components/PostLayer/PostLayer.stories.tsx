@@ -1,11 +1,15 @@
 import { ComponentMeta } from '@storybook/react';
-import React from "react"
+import React, { useState } from "react"
 import { PostLayer, PostLayerProps } from "./PostLayer"
 
 export default {
   title: 'Design System/PostLayer',
   component: PostLayer,
   argTypes: {
+    show: {
+      type: "boolean",
+      defaultValue: true
+    },
     title: {
       type: 'string',
       defaultValue: "Lexie from Shine"

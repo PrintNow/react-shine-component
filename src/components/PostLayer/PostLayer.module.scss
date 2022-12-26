@@ -51,18 +51,21 @@ $border-radius: 0.4375rem;
   }
 
   .CloseBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     position: absolute;
     z-index: 110;
     top: 0;
     right: 0;
     width: 72px;
     height: 72px;
-    outline-offset: -5px;
-    background-position: center center;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMBAMAAACkW0HUAAAAElBMVEWsrbSsrbRHcEysrbSsrbSsrbRHSeN5AAAABXRSTlPIDwC3M1c57JQAAAA6SURBVAjXY3AWUlJSNGEwZVRSEghmEAgQUmRlZABiIItBSSCAlVGJQUmRNUAIQUEEoUqgGqDaIYYBAHZMCOc5ZtbuAAAAAElFTkSuQmCC);
-    background-size: 12px 12px;
-    background-repeat: no-repeat;
-    cursor: pointer;
+
+    svg {
+      cursor: pointer;
+      fill: #A6A8AE;
+    }
   }
 }
 
@@ -102,4 +105,40 @@ $border-radius: 0.4375rem;
       }
     }
   }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.PostLayer__Enter {
+  animation: fade-in; /*动画名称*/
+  animation-duration: .4s; /*动画持续时间*/
+  visibility: visible;
+}
+
+@keyframes fade-leave {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+}
+
+.PostLayer__Leave {
+  animation: fade-leave;
+  animation-duration: .4s;
+  transition: all .4s ease;
+  visibility: hidden;
 }
