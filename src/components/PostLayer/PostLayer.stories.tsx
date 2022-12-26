@@ -1,20 +1,34 @@
-import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
-import { PostLayer } from "./PostLayer"
+import { ComponentMeta } from '@storybook/react';
+import React from "react"
+import { PostLayer, PostLayerProps } from "./PostLayer"
 
-const meta: ComponentMeta<typeof PostLayer> = {
+export default {
   title: 'Design System/PostLayer',
   component: PostLayer,
-};
-export default meta;
+  argTypes: {
+    title: {
+      type: 'string',
+      defaultValue: "Lexie from Shine"
+    },
+    inputPlaceholder: {
+      type: 'string',
+      defaultValue: "Live chat with us"
+    },
+    statusBadge: {
+      defaultValue: "statusBadge",
+      control: { type: 'select' },
+    }
+  }
+} as ComponentMeta<typeof PostLayer>;
 
-export const Default: ComponentStoryObj<typeof PostLayer> = {
-  args: {
-    title: "欢迎",
-    statusBadge: "online",
-    children: (
-        <div>
-          你好啊
-        </div>
-    )
-  },
-};
+export function Default(props: PostLayerProps) {
+  if (!props.onClick) {
+    props.onClick = () => {
+      console.log('点击了')
+    }
+  }
+
+  return <PostLayer { ...props }>
+    <h3>Welcome use Shine React component</h3>
+  </PostLayer>
+}
