@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 // eslint-disable-next-line import/no-deprecated
 import {EventListener} from '@shopify/polaris';
-import {classNames} from '@shopify/polaris/build/ts/latest/src/utilities/css';
-
 import './GridOverlay.css';
+
+type Falsy = boolean | undefined | null | 0;
+export function classNames(...classes: (string | Falsy)[]) {
+  return classes.filter(Boolean).join(' ');
+}
 
 const COLUMNS_SMALL = 4;
 const COLUMNS_LARGE = 12;
