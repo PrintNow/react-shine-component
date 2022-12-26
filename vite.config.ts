@@ -19,7 +19,15 @@ export default defineConfig({
     },
   },
   esbuild: { // 使用到了react17
-    jsxInject: `import React from 'react'`,
+    // jsxInject: `import React from 'react'`,
+  },
+  css: {
+    modules: {
+      scopeBehaviour: 'global',// CSS 变量名不混淆
+      // generateScopedName(name, filename, css) {
+      //   return `${ name }`
+      // }
+    }
   },
   build: {
     emptyOutDir: true,
@@ -30,12 +38,11 @@ export default defineConfig({
       fileName: (format) => `shine-component.${ format }.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'styled-components', '@shopify/polaris'],
+      external: ['react', 'react-dom', '@shopify/polaris'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          'styled-components': 'styled',
           '@shopify/polaris': '@shopify/polaris'
         },
       },
