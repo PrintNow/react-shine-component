@@ -1,7 +1,7 @@
-import { ColorPicker as ShopifyColorPicker, HSBAColor, hsbToHex, Label, Popover, rgbToHsb, Stack, TextField, TextStyle } from "@shopify/polaris"
+import { ColorPicker as ShopifyColorPicker, hexToRgb, HSBAColor, hsbToHex, Label, Popover, rgbToHsb, Stack, TextField, TextStyle } from "@shopify/polaris"
 import { ColorPickerProps } from "@shopify/polaris/build/ts/latest/src/components/ColorPicker/ColorPicker"
 import { uniqueId } from "lodash-es"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useState } from "react"
 
 import styles from "./ColorStyle.module.scss"
 
@@ -26,24 +26,6 @@ export function ColorPicker({ color, placeholder, label, id, onChange, onClickAc
     hue: 120,
     saturation: 1,
   })
-
-  /** 监听 color 值从外部修改 */
-  useEffect(() => {
-    const _color = color.toLocaleUpperCase().replace("#", "")
-
-    if (_color === hexColor) {
-      return
-    }
-
-    const { red, green, blue } = hexToRgb(`#${_color}`)
-
-    if (isNaN(red) || isNaN(green) || isNaN(blue)) {
-      return
-    }
-
-    setPickerColor(rgbToHsb({ blue, green, red }))
-    setHexColor(_color)
-  }, [color])
 
   const togglePopoverActive = useCallback(
       () => {
@@ -83,8 +65,6 @@ export function ColorPicker({ color, placeholder, label, id, onChange, onClickAc
 
     onChange(prefValue, id)
   }
-
-
 
 
 
@@ -171,23 +151,4 @@ export function ColorPicker({ color, placeholder, label, id, onChange, onClickAc
       </Stack>
 
   )
-}
-
-/** 从 Polaris 源码中拷贝的，该函数没有被他们 export 出来，只好把源码弄过来了 */
-function hexToRgb(color: string) {
-  if (color.length === 4) {
-    const repeatHex = (hex1: number, hex2: number) =>
-        color.slice(hex1, hex2).repeat(2)
-    const red = parseInt(repeatHex(1, 2), 16)
-    const green = parseInt(repeatHex(2, 3), 16)
-    const blue = parseInt(repeatHex(3, 4), 16)
-
-    return { blue, green, red }
-  }
-
-  const red = parseInt(color.slice(1, 3), 16)
-  const green = parseInt(color.slice(3, 5), 16)
-  const blue = parseInt(color.slice(5, 7), 16)
-
-  return { blue, green, red }
 }
