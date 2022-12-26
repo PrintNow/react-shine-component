@@ -38,12 +38,13 @@ export default defineConfig({
       fileName: (format) => `shine-component.${ format }.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@shopify/polaris'],
+      external: ['react', 'react-dom', '@shopify/polaris', '@shopify/polaris-icons'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          '@shopify/polaris': '@shopify/polaris'
+          '@shopify/polaris': '@shopify/polaris',
+          '@shopify/polaris-icons': '@shopify/polaris-icons'
         },
       },
     },
