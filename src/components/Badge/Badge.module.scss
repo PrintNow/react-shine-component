@@ -1,10 +1,11 @@
 .Badge {
   .BadgePip {
     display: inline-block;
-    color: var(--pc-pip-color);
-    height: var(--pc-pip-size);
-    width: var(--pc-pip-size);
-    border: var(--p-border-width-2) solid var(--pc-pip-color);
+    height: 8px;
+    width: 8px;
+    margin-right: 4px;
+    margin-bottom: 1px;
+    background-color: #f42626;
     border-radius: var(--p-border-radius-half);
     flex-shrink: 0;
   }

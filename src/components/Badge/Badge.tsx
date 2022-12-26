@@ -6,9 +6,9 @@ export type BadgeProps = {
   color: string;
 }
 
-export default function Badge({ color, children }: BadgeProps) {
+export function Badge({ color, children }: BadgeProps) {
   return <span className={ styles.Badge }>
-    <span className={ styles.BadgePip }></span>
+    <span className={ styles.BadgePip } style={ { backgroundColor: color } }></span>
     { children }
   </span>
 }

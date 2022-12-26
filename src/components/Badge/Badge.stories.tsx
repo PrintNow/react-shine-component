@@ -1,17 +1,18 @@
 import { ComponentMeta } from "@storybook/react"
 import React from 'react';
-import Badge from './Badge';
+import { Badge, BadgeProps } from './';
 
 export default {
   title: 'Design System/Badge',
   component: Badge,
   argTypes: {
     color: {
-      control: { type: 'color', default: '#eee' }
+      control: { type: 'color' },
+      defaultValue: '#017053'
     }
   }
 } as ComponentMeta<typeof Badge>;
 
-export function Default() {
-  return <Badge color="#eee">Default</Badge>
+export function Default(props: BadgeProps) {
+  return <Badge { ...props }>Default</Badge>
 }
