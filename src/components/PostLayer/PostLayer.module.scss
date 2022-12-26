@@ -1,0 +1,66 @@
+$max-width: 376px;
+
+.PostLayer {
+  width: $max-width;
+  max-width: $max-width;
+  background: #fff;
+  position: fixed;
+  z-index: 110;
+  right: var(--p-space-24);
+  bottom: var(--p-space-24);
+  box-shadow: #00000024 0 0.1875rem 2rem;
+  border-radius: 0.4375rem;
+  margin-left: var(--p-space-2);
+
+  header {
+    padding: var(--p-space-6) var(--p-space-6) var(--p-space-4);
+    white-space: nowrap;
+    font-size: var(--p-font-size-100);
+    line-height: 1.5;
+
+    .Avatar {
+      border-radius: 50%;
+      cursor: default;
+      width: 2rem;
+      height: 2rem;
+      line-height: 2rem;
+      font-size: 1rem;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 1rem;
+
+      img {
+        width: 32px;
+        height: auto;
+      }
+    }
+
+    .Information {
+      display: inline-block;
+      vertical-align: middle;
+      color: #737376;
+
+      .Title {
+
+      }
+
+      .StatusBadge {
+      }
+    }
+
+    .CloseBtn {
+      position: absolute;
+      z-index: 110;
+      top: 0;
+      right: 0;
+      width: 72px;
+      height: 72px;
+      outline-offset: -5px;
+      background-position: center center;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMBAMAAACkW0HUAAAAElBMVEWsrbSsrbRHcEysrbSsrbSsrbRHSeN5AAAABXRSTlPIDwC3M1c57JQAAAA6SURBVAjXY3AWUlJSNGEwZVRSEghmEAgQUmRlZABiIItBSSCAlVGJQUmRNUAIQUEEoUqgGqDaIYYBAHZMCOc5ZtbuAAAAAElFTkSuQmCC);
+      background-size: 12px 12px;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+  }
+}
