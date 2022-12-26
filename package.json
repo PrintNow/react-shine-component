@@ -1,5 +1,5 @@
 {
-  "name": "@printnow/shine-component",
+  "name": "react-shine-component",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
@@ -61,5 +61,8 @@
       "import": "./dist/shine-component.es.js",
       "require": "./dist/shine-component.umd.js"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
