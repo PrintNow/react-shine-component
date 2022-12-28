@@ -22,6 +22,14 @@
     ".storybook/**/*.ts",
     ".storybook/**/*.tsx"
   ],
+  "paths": {
+    "@/*": [
+      "./src/*"
+    ],
+    "@components/*": [
+      "./src/components/*"
+    ],
+  },
   "references": [{ "path": "./tsconfig.node.json" }],
   "exclude": ["./src/components/**/*.stories.tsx"]
 }
