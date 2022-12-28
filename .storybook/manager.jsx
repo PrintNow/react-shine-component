@@ -22,7 +22,7 @@ addons.setConfig({
     base: 'light',
     brandTitle: 'Shine Component Storybook',
     brandUrl: '/',
-    brandImage: '/React-Shine-Component.png',
+    brandImage: 'https://cdn.nowtime.cc/static/logo/v1/React-Shine-Component.png',
     appBg: colors.background,
     appContentBg: colors.background,
     appBorderRadius: 4,
