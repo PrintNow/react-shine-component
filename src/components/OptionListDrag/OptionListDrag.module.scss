@@ -1,0 +1,38 @@
+.Sortable__Main {
+  padding: var(--p-space-4) var(--p-space-3) var(--p-space-3);
+  background-color: white;
+}
+
+.SortableContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.SortableItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--p-space-1);
+  padding-left: var(--p-space-2);
+  padding-right: var(--p-space-2);
+  border-radius: var(--p-border-radius-1);
+
+  &:hover, &.Dragged {
+    background: #F6F6F7;
+
+    .DragHandle {
+      visibility: visible;
+    }
+  }
+
+  .DragHandle {
+    visibility: hidden;
+    padding: 8px 5px;
+    border-radius: 8px;
+    cursor: grab;
+
+    &:hover {
+      visibility: visible;
+    }
+  }
+}
