@@ -19,6 +19,7 @@
 
   &:hover, &.Dragged {
     background: #F6F6F7;
+    z-index: 999;
 
     .DragHandle {
       visibility: visible;
