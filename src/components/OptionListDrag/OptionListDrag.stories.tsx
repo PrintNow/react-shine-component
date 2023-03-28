@@ -1,6 +1,6 @@
-import { ComponentMeta } from "@storybook/react"
-import React, { useState } from 'react';
-import { OptionListDrag } from "./OptionListDrag"
+import {ComponentMeta} from "@storybook/react"
+import React, {useState} from 'react';
+import {OptionListDrag} from "./OptionListDrag"
 
 export default {
   title: 'Design System/OptionListDrag',
@@ -14,7 +14,7 @@ export default {
 } as ComponentMeta<typeof OptionListDrag>;
 
 export function Default() {
-  const [items, setItems] = useState([{
+  const [choices, setChoices] = useState([{
     id: "email",
     label: "Email address"
   }, {
@@ -38,10 +38,11 @@ export function Default() {
 
   return <div>
     <OptionListDrag
+        title="COLUMNS"
+        choices={ choices }
         selected={ selected }
-        items={ items }
-        onItemChange={ (_, newItems) => setItems(newItems) }
-        onChoiceChange={ selected => setSelect(selected) }
+        onChoicesChange={ setChoices }
+        onSelectedChange={selected => setSelect(selected) }
     />
   </div>
 }

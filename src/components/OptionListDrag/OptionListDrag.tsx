@@ -13,23 +13,31 @@ export interface Item {
 }
 
 export interface IProps {
-  items: Item[];
+  /** 标题 */
+  title: React.ReactNode;
+
+  /** 选项 */
+  choices: Item[];
+
+  /** 哪些是选中 */
   selected: string[]
 
-  onItemChange(oldItems: IProps['items'], newItems: IProps['items']): void;
+  /** 当位置改变时触发 */
+  onChoicesChange(newChoices: IProps['choices']): void;
 
-  onChoiceChange(selected: string[]): void;
+  /** 当选项选中时触发 */
+  onSelectedChange(selected: string[]): void;
 }
 
-export function OptionListDrag({ items, selected, onItemChange, onChoiceChange }: IProps) {
+export function OptionListDrag({ title, choices, selected, onChoicesChange, onSelectedChange }: IProps) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (over?.id && active.id !== over.id) {
-      const oldIndex = items.findIndex(item => item.id === active.id)
-      const newIndex = items.findIndex(item => item.id === over.id)
+      const oldIndex = choices.findIndex(item => item.id === active.id)
+      const newIndex = choices.findIndex(item => item.id === over.id)
 
-      onItemChange(items, arrayMove(items, oldIndex, newIndex))
+      onChoicesChange(arrayMove(choices, oldIndex, newIndex))
     }
   }
 
@@ -41,18 +49,17 @@ export function OptionListDrag({ items, selected, onItemChange, onChoiceChange }
             restrictToParentElement// 限制移动到父元素
           ] }
       >
-        <SortableContext items={ items } strategy={ verticalListSortingStrategy }>
+        <SortableContext items={ choices } strategy={ verticalListSortingStrategy }>
           <div className={ styles.Sortable__Main }>
-            <div className="title">Columns</div>
-
+            <div className={styles.Sortable__Title}>{title}</div>
             <div className={ styles.SortableContainer }>
-              { items.map((item) => (
+              { choices.map((item) => (
                   <Sortable key={ item.id } id={ item.id }>
                     <Checkbox
                         id={ item.id }
                         checked={ selected.indexOf(item.id) !== -1 }
                         label={ item.label }
-                        onChange={ (newChecked) => onChoiceChange(updateSelectedChoices(item, newChecked, selected)) }
+                        onChange={ (newChecked) => onSelectedChange(updateSelectedChoices(item, newChecked, selected)) }
                     />
                   </Sortable>
               )) }
