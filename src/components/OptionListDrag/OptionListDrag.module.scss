@@ -1,5 +1,5 @@
 .Sortable__Main {
-  padding: var(--p-space-4, 16px) var(--p-space-3, 12px) var(--p-space-3, 12px);
+  padding: var(--p-space-4, 16px) var(--p-space-2, 8px) var(--p-space-2, 8px);
   background-color: white;
 
   .Sortable__Title {
@@ -38,7 +38,8 @@
 
   .DragHandle {
     visibility: hidden;
-    padding: 8px 5px;
+    padding: 8px 0;
+    margin-left: var(--p-space-4, 16px);
     border-radius: 8px;
     cursor: grab;
 
