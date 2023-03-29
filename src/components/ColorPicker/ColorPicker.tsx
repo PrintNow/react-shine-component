@@ -1,7 +1,8 @@
-import { ColorPicker as ShopifyColorPicker, hexToRgb, HSBAColor, hsbToHex, Label, Popover, rgbToHsb, Stack, TextField, TextStyle } from "@shopify/polaris"
+import { ColorPicker as ShopifyColorPicker, HSBAColor, hsbToHex, Label, Popover, rgbToHsb, Stack, TextField, TextStyle } from "@shopify/polaris"
 import { ColorPickerProps } from "@shopify/polaris/build/ts/latest/src/components/ColorPicker/ColorPicker"
 import { uniqueId } from "lodash-es"
 import React, { useCallback, useState } from "react"
+import { hexToRgb } from "../../utils/color"
 
 import styles from "./ColorStyle.module.scss"
 
