@@ -1,6 +1,6 @@
 {
   "name": "react-shine-component",
-  "version": "0.0.4-beta",
+  "version": "0.0.5-beta",
   "type": "module",
   "scripts": {
     "dev": "vite --host=0.0.0.0 --port=9566",
@@ -52,7 +52,8 @@
   "peerDependencies": {
     "react": "^16.8.0 || 17.x || 18.x",
     "react-dom": "^16.8.0 || 17.x || 18.x",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.0",
+    "@shopify/polaris": "^9.x || ^ 10.x"
   },
   "files": [
     "dist"
