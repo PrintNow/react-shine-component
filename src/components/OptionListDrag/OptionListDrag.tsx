@@ -12,7 +12,7 @@ export interface Item {
   label: string;
 }
 
-export interface IProps {
+export interface OptionListDragProps {
   /** 标题 */
   title: React.ReactNode;
 
@@ -23,13 +23,13 @@ export interface IProps {
   selected: string[]
 
   /** 当位置改变时触发 */
-  onChoicesChange(newChoices: IProps['choices']): void;
+  onChoicesChange(newChoices: OptionListDragProps['choices']): void;
 
   /** 当选项选中时触发 */
   onSelectedChange(selected: string[]): void;
 }
 
-export function OptionListDrag({ title, choices, selected, onChoicesChange, onSelectedChange }: IProps) {
+export function OptionListDrag({ title, choices, selected, onChoicesChange, onSelectedChange }: OptionListDragProps) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 

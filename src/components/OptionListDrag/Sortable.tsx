@@ -7,12 +7,12 @@ import { Item } from "./OptionListDrag"
 
 import styles from "./OptionListDrag.module.scss";
 
-interface IProps {
+export interface SortableProps {
   id: Item['id'];
   children: React.ReactNode
 }
 
-export function Sortable({ id, children }: IProps) {
+export function Sortable({ id, children }: SortableProps) {
   const {
     setNodeRef,
     transform,

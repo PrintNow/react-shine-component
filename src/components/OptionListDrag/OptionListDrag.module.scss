@@ -22,10 +22,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--p-space-1, 4px);
   padding-left: var(--p-space-2, 8px);
   padding-right: var(--p-space-2, 8px);
   border-radius: var(--p-border-radius-1, 4px);
+
+  &:not(:last-child){
+    margin-bottom: var(--p-space-1, 4px);
+  }
 
   &:hover, &.Dragged {
     background: #F6F6F7;
