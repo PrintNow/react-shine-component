@@ -4,8 +4,7 @@ import { Icon } from "@shopify/polaris"
 import { DragHandleMinor } from "@shopify/polaris-icons"
 import React from "react";
 import { Item } from "./OptionListDrag"
-
-import styles from "./OptionListDrag.module.scss";
+import "./OptionListDrag.scss"
 
 export interface SortableProps {
   id: Item['id'];
@@ -27,12 +26,12 @@ export function Sortable({ id, children }: SortableProps) {
 
   return (
       <div
-          className={ `${ styles.SortableItem } ${ isDragging ? styles.Dragged : "" }` }
+          className={ `SortableItem ${ isDragging ? "Dragged" : "" }` }
           ref={ setNodeRef }
           style={ style }
       >
         { children }
-        <span { ...listeners } className={ styles.DragHandle }>
+        <span { ...listeners } className={ "DragHandle" }>
           {/* @ts-ignore */ }
           <Icon source={ DragHandleMinor } />
         </span>

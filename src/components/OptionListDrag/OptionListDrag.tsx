@@ -3,8 +3,8 @@ import { DragEndEvent } from "@dnd-kit/core/dist/types"
 import { restrictToParentElement, restrictToVerticalAxis } from "@dnd-kit/modifiers"
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { Checkbox } from "@shopify/polaris"
-import React from "react";
-import styles from "./OptionListDrag.module.scss";
+import React from "react"
+import "./OptionListDrag.scss";
 import { Sortable } from "./Sortable";
 
 export interface Item {
@@ -50,9 +50,9 @@ export function OptionListDrag({ title, choices, selected, onChoicesChange, onSe
           ] }
       >
         <SortableContext items={ choices } strategy={ verticalListSortingStrategy }>
-          <div className={ styles.Sortable__Main }>
-            <div className={styles.Sortable__Title}>{title}</div>
-            <div className={ styles.SortableContainer }>
+          <div className={ "Sortable__Main" }>
+            <div className={ "Sortable__Title" }>{ title }</div>
+            <div className={ "SortableContainer" }>
               { choices.map((item) => (
                   <Sortable key={ item.id } id={ item.id }>
                     <Checkbox
