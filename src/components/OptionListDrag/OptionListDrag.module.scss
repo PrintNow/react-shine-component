@@ -1,0 +1,57 @@
+.Sortable__Main {
+  padding: var(--p-space-4, 16px) var(--p-space-2, 8px) var(--p-space-2, 8px);
+  background-color: white;
+
+  .Sortable__Title {
+    color: var(--p-action-secondary-depressed, #6D7175);
+    font-size: var(--p-font-size-75, 12px);
+    font-weight: 600;
+    line-height: 16px;
+
+    padding-left: var(--p-space-2, 8px);
+    padding-bottom: var(--p-space-3, 12px);
+  }
+}
+
+.SortableContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.SortableItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: var(--p-space-2, 8px);
+  padding-right: var(--p-space-2, 8px);
+  border-radius: var(--p-border-radius-1, 4px);
+
+  &:not(:last-child){
+    margin-bottom: var(--p-space-1, 4px);
+  }
+
+  &:hover, &.Dragged {
+    background: #F6F6F7;
+    z-index: 999;
+
+    .DragHandle {
+      visibility: visible;
+    }
+  }
+
+  .DragHandle {
+    visibility: hidden;
+    padding: 8px 0;
+    margin-left: var(--p-space-4, 16px);
+    border-radius: 8px;
+    cursor: grab;
+
+    &:hover {
+      visibility: visible;
+    }
+
+    span > svg {
+      fill: #5C5F62;
+    }
+  }
+}
