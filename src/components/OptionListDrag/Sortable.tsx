@@ -9,24 +9,28 @@ import "./OptionListDrag.scss"
 export interface SortableProps {
   id: Item['id'];
   children: React.ReactNode
+  disabled: boolean
 }
 
-export function Sortable({ id, children }: SortableProps) {
+export function Sortable({ id, children, disabled }: SortableProps) {
   const {
     setNodeRef,
     transform,
     transition,
     listeners,
     isDragging
-  } = useSortable({ id });
-  const style = {
+  } = useSortable({
+    id, disabled,
+  })
+
+  const style = disabled ? undefined : {
     transform: CSS.Transform.toString(transform),
-    transition
-  };
+    transition,
+  }
 
   return (
       <div
-          className={ `SortableItem ${ isDragging ? "Dragged" : "" }` }
+          className={ `SortableItem ${ isDragging ? "Dragged" : "" } ${ disabled ? "disabledDrag" : "" }` }
           ref={ setNodeRef }
           style={ style }
       >

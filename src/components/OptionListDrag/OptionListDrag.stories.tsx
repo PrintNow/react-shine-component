@@ -43,6 +43,7 @@ export function Default() {
       title="COLUMNS"
       choices={choices}
       selected={selected}
+      disabled={['email', 'phone']}
       onChoicesChange={setChoices}
       onSelectedChange={selected => setSelect(selected)}
     />
@@ -104,6 +105,7 @@ export function PopoverOptionListDrag() {
             title="COLUMNS"
             choices={choices}
             selected={selected}
+            disabled={['email', 'phone']}
             onChoicesChange={setChoices}
             onSelectedChange={selected => setSelect(selected)}
           />

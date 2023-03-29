@@ -10,6 +10,8 @@ import { Sortable } from "./Sortable";
 export interface Item {
   id: string;
   label: string;
+
+  [field: string]: any;
 }
 
 export interface OptionListDragProps {
@@ -22,6 +24,8 @@ export interface OptionListDragProps {
   /** 哪些是选中 */
   selected: string[]
 
+  disabled: string[]
+
   /** 当位置改变时触发 */
   onChoicesChange(newChoices: OptionListDragProps['choices']): void;
 
@@ -29,16 +33,32 @@ export interface OptionListDragProps {
   onSelectedChange(selected: string[]): void;
 }
 
-export function OptionListDrag({ title, choices, selected, onChoicesChange, onSelectedChange }: OptionListDragProps) {
+export function OptionListDrag({ title, choices, selected, disabled, onChoicesChange, onSelectedChange }: OptionListDragProps) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
-    if (over?.id && active.id !== over.id) {
-      const oldIndex = choices.findIndex(item => item.id === active.id)
-      const newIndex = choices.findIndex(item => item.id === over.id)
-
-      onChoicesChange(arrayMove(choices, oldIndex, newIndex))
+    if (typeof active.id !== "string" || typeof over?.id !== "string") {
+      return
     }
+
+    if(active.id === over.id){
+      return;
+    }
+
+    // 判断{选择 item}是否为禁用字段
+    if(disabled.includes(active.id)){
+      return
+    }
+
+    // 判断{目标 item}是否为禁用字段
+    if(disabled.includes(over.id)){
+      return
+    }
+
+    const oldIndex = choices.findIndex(item => item.id === active.id)
+    const newIndex = choices.findIndex(item => item.id === over.id)
+
+    onChoicesChange(arrayMove(choices, oldIndex, newIndex))
   }
 
   return (
@@ -53,16 +73,21 @@ export function OptionListDrag({ title, choices, selected, onChoicesChange, onSe
           <div className={ "Sortable__Main" }>
             <div className={ "Sortable__Title" }>{ title }</div>
             <div className={ "SortableContainer" }>
-              { choices.map((item) => (
-                  <Sortable key={ item.id } id={ item.id }>
+              { choices.map((item) => {
+                const isDisabled = disabled.includes(item.id)
+
+                return (
+                  <Sortable disabled={isDisabled} key={item.id} id={item.id}>
                     <Checkbox
-                        id={ item.id }
-                        checked={ selected.indexOf(item.id) !== -1 }
-                        label={ item.label }
-                        onChange={ (newChecked) => onSelectedChange(updateSelectedChoices(item, newChecked, selected)) }
+                      id={item.id}
+                      checked={selected.indexOf(item.id) !== -1}
+                      disabled={isDisabled}
+                      label={item.label}
+                      onChange={(newChecked) => onSelectedChange(updateSelectedChoices(item, newChecked, selected))}
                     />
                   </Sortable>
-              )) }
+                )
+              }) }
             </div>
           </div>
         </SortableContext>
