@@ -8,11 +8,12 @@ import "./OptionListDrag.scss"
 
 export interface SortableProps {
   id: Item['id'];
-  children: React.ReactNode
-  disabled: boolean
+  children: React.ReactNode;
+  disabled: boolean;
+  disabledCanSort?: boolean;
 }
 
-export function Sortable({ id, children, disabled }: SortableProps) {
+export function Sortable({ id, children, disabled, disabledCanSort }: SortableProps) {
   const {
     setNodeRef,
     transform,
@@ -23,7 +24,7 @@ export function Sortable({ id, children, disabled }: SortableProps) {
     id, disabled,
   })
 
-  const style = disabled ? undefined : {
+  const style = disabledCanSort && disabled ? undefined : {
     transform: CSS.Transform.toString(transform),
     transition,
   }
