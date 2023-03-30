@@ -30,7 +30,7 @@
     margin-bottom: var(--p-space-1, 4px);
   }
 
-  &:hover, &.Dragged {
+  &:hover:not(.disabledDrag), &.Dragged {
     background: #F6F6F7;
     z-index: 999;
 
