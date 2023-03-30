@@ -44,6 +44,7 @@ export function Default() {
       choices={choices}
       selected={selected}
       disabled={['email', 'phone']}
+      disabledCanSort
       onChoicesChange={setChoices}
       onSelectedChange={selected => setSelect(selected)}
     />

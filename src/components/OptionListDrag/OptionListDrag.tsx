@@ -15,25 +15,49 @@ export interface Item {
 }
 
 export interface OptionListDragProps {
-  /** 标题 */
+  /**
+   * 标题
+   */
   title: React.ReactNode;
 
-  /** 选项 */
+  /**
+   * 选项
+   */
   choices: Item[];
 
-  /** 哪些是选中 */
-  selected: string[]
+  /**
+   * 哪些是选中
+   */
+  selected: string[];
 
-  disabled: string[]
+  /**
+   * 哪些是被禁用的
+   */
+  disabled: string[];
 
-  /** 当位置改变时触发 */
+  /**
+   * 禁用的 item 是否可以进行排序，默认是允许排序
+   */
+  disabledCanSort?: boolean;
+
+  /**
+   * 当位置改变时触发
+   */
   onChoicesChange(newChoices: OptionListDragProps['choices']): void;
 
-  /** 当选项选中时触发 */
+  /**
+   * 当选项选中时触发
+   */
   onSelectedChange(selected: string[]): void;
 }
 
-export function OptionListDrag({ title, choices, selected, disabled, onChoicesChange, onSelectedChange }: OptionListDragProps) {
+export function OptionListDrag(
+  {
+    title, choices,
+    selected, disabled, disabledCanSort,
+    onChoicesChange, onSelectedChange
+  }: OptionListDragProps
+) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -51,7 +75,7 @@ export function OptionListDrag({ title, choices, selected, disabled, onChoicesCh
     }
 
     // 判断{目标 item}是否为禁用字段
-    if(disabled.includes(over.id)){
+    if(disabled.includes(over.id) && disabledCanSort){
       return
     }
 
@@ -77,7 +101,7 @@ export function OptionListDrag({ title, choices, selected, disabled, onChoicesCh
                 const isDisabled = disabled.includes(item.id)
 
                 return (
-                  <Sortable disabled={isDisabled} key={item.id} id={item.id}>
+                  <Sortable disabledCanSort={disabledCanSort} disabled={isDisabled} key={item.id} id={item.id}>
                     <Checkbox
                       id={item.id}
                       checked={selected.indexOf(item.id) !== -1}
