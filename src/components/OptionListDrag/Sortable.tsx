@@ -2,9 +2,10 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Icon } from "@shopify/polaris"
 import { DragHandleMinor } from "@shopify/polaris-icons"
+import classNames from "classnames"
 import React from "react";
 import { Item } from "./OptionListDrag"
-import "./OptionListDrag.scss"
+import styles from "./OptionListDrag.module.scss"
 
 export interface SortableProps {
   id: Item['id'];
@@ -31,12 +32,16 @@ export function Sortable({ id, children, disabled, disabledCanSort }: SortablePr
 
   return (
       <div
-          className={ `SortableItem ${ isDragging ? "Dragged" : "" } ${ disabled ? "disabledDrag" : "" }` }
+          className={ classNames({
+            [styles.Dragged]: isDragging,
+            [styles.disabledDrag]: disabled,
+            [styles.SortableItem]: true
+          }) }
           ref={ setNodeRef }
           style={ style }
       >
         { children }
-        <span { ...listeners } className={ "DragHandle" }>
+        <span { ...listeners } className={ styles.DragHandle }>
           {/* @ts-ignore */ }
           <Icon source={ DragHandleMinor } />
         </span>

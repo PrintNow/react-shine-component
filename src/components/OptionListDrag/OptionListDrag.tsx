@@ -2,10 +2,12 @@ import { DndContext } from "@dnd-kit/core";
 import { DragEndEvent } from "@dnd-kit/core/dist/types"
 import { restrictToParentElement, restrictToVerticalAxis } from "@dnd-kit/modifiers"
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { Checkbox } from "@shopify/polaris"
+import { Checkbox, SkeletonBodyText } from "@shopify/polaris"
 import React from "react"
-import "./OptionListDrag.scss";
 import { Sortable } from "./Sortable";
+
+import styles from "./OptionListDrag.module.scss"
+import classNames from "classnames";
 
 export interface Item {
   id: string;
@@ -41,6 +43,11 @@ export interface OptionListDragProps {
   disabledCanSort?: boolean;
 
   /**
+   * <默认 false> 是否为加载中状态，true：显示骨架屏
+   */
+  loading?: boolean;
+
+  /**
    * 当位置改变时触发
    */
   onChoicesChange(newChoices: OptionListDragProps['choices']): void;
@@ -52,11 +59,11 @@ export interface OptionListDragProps {
 }
 
 export function OptionListDrag(
-  {
-    title, choices,
-    selected, disabled, disabledCanSort,
-    onChoicesChange, onSelectedChange
-  }: OptionListDragProps
+    {
+      title, choices, loading,
+      selected, disabled, disabledCanSort,
+      onChoicesChange, onSelectedChange
+    }: OptionListDragProps
 ) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -65,17 +72,17 @@ export function OptionListDrag(
       return
     }
 
-    if(active.id === over.id){
+    if (active.id === over.id) {
       return;
     }
 
     // 判断{选择 item}是否为禁用字段
-    if(disabled.includes(active.id)){
+    if (disabled.includes(active.id)) {
       return
     }
 
     // 判断{目标 item}是否为禁用字段
-    if(disabled.includes(over.id) && disabledCanSort){
+    if (disabled.includes(over.id) && disabledCanSort) {
       return
     }
 
@@ -94,25 +101,36 @@ export function OptionListDrag(
           ] }
       >
         <SortableContext items={ choices } strategy={ verticalListSortingStrategy }>
-          <div className={ "Sortable__Main" }>
-            <div className={ "Sortable__Title" }>{ title }</div>
-            <div className={ "SortableContainer" }>
-              { choices.map((item) => {
-                const isDisabled = disabled.includes(item.id)
+          <div className={ classNames(
+              styles.Sortable__Main,
+              {[styles.SortableLoading]: loading}
+          ) }>
+            { loading ? (
+                <div style={ { width: `120px` } }>
+                  <SkeletonBodyText lines={ 4 } />
+                </div>
+            ) : (
+                <>
+                  <div className={ styles.Sortable__Title }>{ title }</div>
+                  <div className={ styles.SortableContainer }>
+                    { choices.map((item) => {
+                      const isDisabled = disabled.includes(item.id)
 
-                return (
-                  <Sortable disabledCanSort={disabledCanSort} disabled={isDisabled} key={item.id} id={item.id}>
-                    <Checkbox
-                      id={item.id}
-                      checked={selected.indexOf(item.id) !== -1}
-                      disabled={isDisabled}
-                      label={item.label}
-                      onChange={(newChecked) => onSelectedChange(updateSelectedChoices(item, newChecked, selected))}
-                    />
-                  </Sortable>
-                )
-              }) }
-            </div>
+                      return (
+                          <Sortable disabledCanSort={ disabledCanSort } disabled={ isDisabled } key={ item.id } id={ item.id }>
+                            <Checkbox
+                                id={ item.id }
+                                checked={ selected.indexOf(item.id) !== -1 }
+                                disabled={ isDisabled }
+                                label={ item.label }
+                                onChange={ (newChecked) => onSelectedChange(updateSelectedChoices(item, newChecked, selected)) }
+                            />
+                          </Sortable>
+                      )
+                    }) }
+                  </div>
+                </>
+            ) }
           </div>
         </SortableContext>
 
@@ -124,7 +142,9 @@ export function OptionListDrag(
 }
 
 function updateSelectedChoices(
-    { id }: Item,
+    {
+      id
+    }: Item,
     checked: boolean,
     selected: string[],
 ) {
