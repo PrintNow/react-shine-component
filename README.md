@@ -1,1 +1,76 @@
-https://dev.to/nicolaserny/create-a-react-component-library-with-vite-and-typescript-1ih9
+# 目前拥有的组件
+
+## OptionListDrag
+
+用法：
+```tsx
+import {ComponentMeta} from "@storybook/react"
+import React, {useCallback, useState} from 'react';
+import {OptionListDrag} from "./OptionListDrag"
+import {Button, Popover} from "@shopify/polaris";
+import {Columns3Minor} from "@shopify/polaris-icons";
+
+export function PopoverOptionListDrag() {
+  const [choices, setChoices] = useState([{
+    id: "email",
+    label: "Email address"
+  }, {
+    id: "phone",
+    label: "Phone number"
+  }, {
+    id: "name",
+    label: "Customer name"
+  }, {
+    id: "email_status",
+    label: "Email status"
+  }, {
+    id: "sms_status",
+    label: "SMS status"
+  }, {
+    id: "popup",
+    label: "Popup"
+  }])
+
+  const [selected, setSelect] = useState<string[]>([])
+  const [popoverActive, setPopoverActive] = useState(true);
+  const togglePopoverActive = useCallback(
+      () => setPopoverActive((popoverActive) => !popoverActive),
+      [],
+  );
+
+  const activator = (
+      <Button onClick={ togglePopoverActive } icon={ Columns3Minor }>
+        Columns
+      </Button>
+  );
+
+  return (
+      <div>
+        <div>
+          <div>已选中：<code>{ JSON.stringify(selected, null, 2) }</code></div>
+          <div>顺序：
+            <pre>{ JSON.stringify(choices, null, 2) }</pre>
+          </div>
+        </div>
+
+        <div style={ { height: '250px', marginTop: '32px' } }>
+          <Popover
+              active={ popoverActive }
+              activator={ activator }
+              autofocusTarget="first-node"
+              onClose={ togglePopoverActive }
+          >
+            <OptionListDrag
+                title="COLUMNS"
+                choices={ choices }
+                selected={ selected }
+                disabled={ ['email', 'phone'] }
+                onChoicesChange={ setChoices }
+                onSelectedChange={ selected => setSelect(selected) }
+            />
+          </Popover>
+        </div>
+      </div>
+  )
+}
+```

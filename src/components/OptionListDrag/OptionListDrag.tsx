@@ -33,7 +33,7 @@ export interface OptionListDragProps {
   /**
    * 哪些是被禁用的
    */
-  disabled: string[];
+  disabled?: string[];
 
   /**
    * 禁用的 item 是否可以进行排序，默认是允许排序
@@ -70,12 +70,12 @@ export function OptionListDrag(
     }
 
     // 判断{选择 item}是否为禁用字段
-    if(disabled.includes(active.id)){
+    if(disabled?.includes(active.id) === true){
       return
     }
 
     // 判断{目标 item}是否为禁用字段
-    if(disabled.includes(over.id) && disabledCanSort){
+    if(disabled?.includes(over.id) === true && disabledCanSort){
       return
     }
 
@@ -98,7 +98,7 @@ export function OptionListDrag(
             <div className={ "Sortable__Title" }>{ title }</div>
             <div className={ "SortableContainer" }>
               { choices.map((item) => {
-                const isDisabled = disabled.includes(item.id)
+                const isDisabled = disabled?.includes(item.id) === true
 
                 return (
                   <Sortable disabledCanSort={disabledCanSort} disabled={isDisabled} key={item.id} id={item.id}>
