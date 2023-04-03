@@ -44,6 +44,7 @@ export function Default() {
       choices={choices}
       selected={selected}
       disabled={['email', 'phone']}
+      disabledCanSort
       onChoicesChange={setChoices}
       onSelectedChange={selected => setSelect(selected)}
     />
@@ -85,9 +86,6 @@ export function PopoverOptionListDrag() {
     </Button>
   );
 
-  const [loading, setLoading] = useState(true)
-  setTimeout(() => setLoading(false), 2500)
-
   return (
     <div>
       <div>
@@ -109,7 +107,6 @@ export function PopoverOptionListDrag() {
             choices={choices}
             selected={selected}
             disabled={['email', 'phone']}
-            loading={loading}
             onChoicesChange={setChoices}
             onSelectedChange={selected => setSelect(selected)}
           />

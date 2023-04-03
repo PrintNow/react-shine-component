@@ -2,10 +2,6 @@
   padding: var(--p-space-4, 16px) var(--p-space-2, 8px) var(--p-space-2, 8px);
   background-color: white;
 
-  &.SortableLoading {
-    padding: var(--p-space-4);
-  }
-
   .Sortable__Title {
     color: var(--p-action-secondary-depressed, #6D7175);
     font-size: var(--p-font-size-75, 12px);
