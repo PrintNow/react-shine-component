@@ -31,6 +31,7 @@ export default defineConfig({
   },
   build: {
     emptyOutDir: true,
+    target: 'esnext',
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'ShineComponent',
